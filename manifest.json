@@ -1,0 +1,41 @@
+{
+  "name": "Obsy",
+  "version": "0.0.1",
+  "description": "Observe things",
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "js/background.js"
+  },
+  "content_scripts": [
+    {
+      "runs_at": "document_start",
+      "js": [
+        
+        "js/dependencies/jquery.js",
+        "js/contentScript.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "action": {
+    "default_icon": {
+      "16": "assets/ext-icon.png",
+      "24": "assets/ext-icon.png",
+      "32": "assets/ext-icon.png"
+    },
+    "default_title": "Obsy",
+    "default_popup": "popup.html"
+  },
+ 
+  "manifest_version": 3
+}
