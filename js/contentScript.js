@@ -61,38 +61,56 @@
 
 // console.log("lol -=-0---------------------");
 
-const selectButton = document.createElement("button");
-selectButton.innerText = "Select";
+// const overlay = document.createElement('div');
+// overlay.style.position = 'absolute';
+// overlay.style.top = 0;
+// overlay.style.left = 0;
+// overlay.style.right = 0;
+// overlay.style.bottom = 0;
+// overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
+// overlay.style.color = '#fff';
+// overlay.style.textAlign = 'center';
+// overlay.style.verticalAlign = 'middle';
+// overlay.style.display = 'none';
+// document.body.appendChild(overlay);
 
-// overlay.style.display = "table-cell";
-// overlay.style.verticalAlign = "middle";
-// overlay.style.textAlign = "center";
+
 
 document.addEventListener("mouseover", (event) => {
+ 
   if (
     event.ctrlKey &&
     event.target.ownerDocument.URL.indexOf("popup.html") === -1
   ) {
+    event.preventDefault();
     // Get the element the mouse is currently over.
     const element = event.target;
 
-    // if(event.target.classList.contains("popUpPage")){
-    //   console.log("yess")
+    element.addEventListener('click', (event) => {
+      console.log(event.target);
 
-    // }
+    })
 
-    // element.style.background = rgba(0, 255, 0, 0.2);
+    // overlay.innerText = element.tagName;
+    // overlay.style.top = `${element.offsetTop}px`;
+    // overlay.style.left = `${element.offsetLeft}px`;
+    // overlay.style.width = `${element.offsetWidth}px`;
+    // overlay.style.height = `${element.offsetHeight}px`;
+
+    // overlay.style.display = 'block';
+
+    
+
     element.style.boxShadow = "0 0 0 2px #00a0d2";
 
-    //element.appendChild(selectButton);
   }
 });
 
 document.addEventListener("mouseout", (event) => {
   const element = event.target;
 
-  // Remove the highlight from the element.
-  //element.style.color = "";
+
+  //overlay.style.display = 'none';
   element.style.boxShadow = "";
   // element.removeChild(selectButton);
 });
