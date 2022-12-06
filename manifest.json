@@ -29,9 +29,9 @@
   ],
   "action": {
     "default_icon": {
-      "16": "assets/ext-icon.png",
-      "24": "assets/ext-icon.png",
-      "32": "assets/ext-icon.png"
+      "16": "assets/obsyIcon.png",
+      "24": "assets/obsyIcon.png",
+      "32": "assets/obsyIcon.png"
     },
     "default_title": "Obsy",
     "default_popup": "popup.html"

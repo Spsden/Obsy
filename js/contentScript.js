@@ -1,3 +1,59 @@
+// Listen for messages from the popup
+chrome.runtime.onMessage.addListener((message) => {
+  if (message === true) {
+    // Start the script
+    //alert("hihi")
+    console.log("true")
+  } else if (message === false) {
+    // Stop the script
+    console.log("fals3")
+    //alert("false")
+  }
+});
+
+
+
+
+
+document.addEventListener("mouseover", (event) => {
+  if (
+    event.ctrlKey &&
+    event.target.ownerDocument.URL.indexOf("popup.html") === -1
+  ) {
+    event.preventDefault();
+
+    const element = event.target;
+
+    element.addEventListener("click", (event) => {
+      console.log(xpath(element));
+    });
+    element.style.boxShadow = "0 0 0 2px #00a0d2";
+  }
+});
+
+document.addEventListener("mouseout", (event) => {
+  const element = event.target;
+
+  element.style.boxShadow = "";
+});
+
+function xpath(el) {
+  if (typeof el == "string")
+    return document.evaluate(el, document, null, 0, null);
+  if (!el || el.nodeType != 1) return "";
+  //if (el.id) return "//*[@id='" + el.id + "']"
+  if (el.parentNode == null) return "/${el.tagName}/";
+  let sames = [].filter.call(el.parentNode.children, function (x) {
+    return x.tagName == el.tagName;
+  });
+  return (
+    xpath(el.parentNode) +
+    "/" +
+    el.tagName.toLowerCase() +
+    (sames.length > 1 ? "[" + ([].indexOf.call(sames, el) + 1) + "]" : "")
+  );
+}
+
 // $(document).ready(function () {
 
 //   console.log("kjuj");
@@ -73,44 +129,3 @@
 // overlay.style.verticalAlign = 'middle';
 // overlay.style.display = 'none';
 // document.body.appendChild(overlay);
-
-
-
-document.addEventListener("mouseover", (event) => {
- 
-  if (
-    event.ctrlKey &&
-    event.target.ownerDocument.URL.indexOf("popup.html") === -1
-  ) {
-    event.preventDefault();
-    // Get the element the mouse is currently over.
-    const element = event.target;
-
-    element.addEventListener('click', (event) => {
-      console.log(event.target);
-
-    })
-
-    // overlay.innerText = element.tagName;
-    // overlay.style.top = `${element.offsetTop}px`;
-    // overlay.style.left = `${element.offsetLeft}px`;
-    // overlay.style.width = `${element.offsetWidth}px`;
-    // overlay.style.height = `${element.offsetHeight}px`;
-
-    // overlay.style.display = 'block';
-
-    
-
-    element.style.boxShadow = "0 0 0 2px #00a0d2";
-
-  }
-});
-
-document.addEventListener("mouseout", (event) => {
-  const element = event.target;
-
-
-  //overlay.style.display = 'none';
-  element.style.boxShadow = "";
-  // element.removeChild(selectButton);
-});
