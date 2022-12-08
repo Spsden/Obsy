@@ -1,41 +1,85 @@
-// Listen for messages from the popup
-chrome.runtime.onMessage.addListener((message) => {
-  if (message === true) {
-    // Start the script
-    //alert("hihi")
-    console.log("true")
-  } else if (message === false) {
-    // Stop the script
-    console.log("fals3")
-    //alert("false")
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.message === "launch-popup") {
+    console.log("hehe");
+    launchPopUp();
   }
 });
 
+function hehe() {
+  document.body.style.background = "red";
 
+  console.log("testing");
+}
+const bottom = document.getElementsByClassName("bottom-box");
 
+function launchPopUp() {
+  // Create the floating window
 
+  let window = document.createElement("div");
+  window.className = "obsyBottomPopUp"
+  window.style.position = "fixed";
+  window.style.height = "350px";
+  window.style.width = "500px";
+  window.style.backgroundColor = "#1f2633";
+  window.style.bottom = "5px";
+  window.style.right = "5px";
+  window.style.color = "white";
+  window.style.borderRadius = "8px";
+  window.style.padding = "8px";
+  window.style.display = "flex";
+  window.style.justifyContent = "space-evenly";
+  window.style.flexDirection = "column";
 
-document.addEventListener("mouseover", (event) => {
-  if (
-    event.ctrlKey &&
-    event.target.ownerDocument.URL.indexOf("popup.html") === -1
-  ) {
-    event.preventDefault();
+  window.innerHTML = bottomPopup;
 
-    const element = event.target;
+  document.body.appendChild(window);
 
-    element.addEventListener("click", (event) => {
-      console.log(xpath(element));
-    });
-    element.style.boxShadow = "0 0 0 2px #00a0d2";
-  }
-});
+  HoverSelector(window);
+}
 
-document.addEventListener("mouseout", (event) => {
-  const element = event.target;
+function HoverSelector(bottomDiv) {
+  const hoverDisplayBox = bottomDiv.querySelector("#info_boxes");
+  const startButton = bottomDiv.getElementsByClassName("observe-btn")[0];
+  const xPathDisplayBox = bottomDiv.querySelector("#xpath_box");
+  console.log(xPathDisplayBox);
+  startButton.addEventListener("click", () => {
+    console.log("starthd");
+  });
+  let hoveredElement = null;
 
-  element.style.boxShadow = "";
-});
+  document.addEventListener("mouseover", (event) => {
+    if (
+      event.ctrlKey &&
+      event.target.ownerDocument.URL.indexOf("popup.html") === -1
+    ) {
+      event.preventDefault();
+
+      hoveredElement = event.target;
+
+      hoveredElement.style.boxShadow = "0 0 0 2px #00a0d2";
+      hoverDisplayBox.src =
+        "data:text/html;charset=utf-8," + encodeURI(hoveredElement.innerHTML);
+    }
+  });
+
+  document.addEventListener("mouseout", (event) => {
+    if (hoveredElement != null) {
+      hoveredElement.style.boxShadow = "";
+      hoveredElement = null;
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    if (hoveredElement && hoveredElement.isEqualNode(event.target)) {
+      event.preventDefault();
+
+      const xPath = xpath(hoveredElement);
+      xPathDisplayBox.value = xPath;
+
+      console.log(xPath);
+    }
+  });
+}
 
 function xpath(el) {
   if (typeof el == "string")
@@ -53,6 +97,35 @@ function xpath(el) {
     (sames.length > 1 ? "[" + ([].indexOf.call(sames, el) + 1) + "]" : "")
   );
 }
+
+const bottomPopup = `
+<div style="height:50%;width:100%;display:block", class="hover-box">
+   <label for="hovering_over" , class="labels">Hovering over</label
+      ><br />
+   <iframe
+      style="padding:3px;width:100%;height:100%;border-radius:8px;background-color:white",
+      id="info_boxes"
+      ></iframe>
+</div>
+<br><br><br>
+<div style="display:flex;width:100%;flex-wrap: wrap;align-items:center">
+
+   <label style="width:100%", for="xpath">Xpath</label><br />
+   <input
+      style= "padding:5px;flex-grow:100;height:30px;border-radius:8px;margin-right:10px;box-sizing: border-box;"
+      type="text" , id="xpath_box" ,name="xpath" readonly/>
+      
+         <button style="border-radius:8px;padding: 10px 10px;color: #fff;background-color: #405cf5; cursor: pointer;box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;border-width: 0; appearance: button; box-sizing: border-box;" class="observe-btn">Copy</button>
+</div>
+
+
+
+<br>
+
+<div>
+   <button style="border-radius:8px;padding: 10px 25px;color: #fff;background-color: #405cf5; cursor: pointer;box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;border-width: 0; appearance: button; box-sizing: border-box;" class="observe-btn">Start Observing</button>
+</div>
+`;
 
 // $(document).ready(function () {
 

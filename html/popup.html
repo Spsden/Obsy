@@ -4,15 +4,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="css/popup.css" rel="stylesheet" type="text/css" />
+    <link href="/css/popup.css" rel="stylesheet" type="text/css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
     />
 
-    <script type="module" src="js/dependencies/jquery.js"></script>
-    <script type="module" src="js/contentScript.js"></script>
-    <script type="module" src="js/popUp.js"></script>
+    <script type="module" src="/js/dependencies/jquery.js"></script>
+    <script type="module" src="/js/contentScript.js"></script>
+    <script type="module" src="/js/popUp.js"></script>
 
     <title>Document</title>
   </head>
@@ -24,16 +24,8 @@
       </div>
 
       <div class="bottom_container">
-        <div class="button-box">
-          <input type="checkbox" id="click" class="switch" />
-          <label class="switch-container" for="click">
-            <i class="fa fa-power-off"></i>
-          </div>
-        </span>
-        <br>
-
-        <div class="below_button">
-          <div class="info-box">
+      
+          <div class="hover-box">
             <label for="hovering_over" , class="labels">Hovering over</label
             ><br />
             <input
@@ -46,11 +38,14 @@
           </div>
           <br />
 
-          <div class="info-box">
+          <div class="xpath-box">
             <label for="xpath" , class="labels">Xpath</label><br />
             <input type="text" , id="xpath_box" ,name="xpath" readonly />
           </div>
-        </div>
+          <div>
+            <button class="observe-btn">Select Element</button>
+          </div>
+       
       </div>
     </div>
   </body>

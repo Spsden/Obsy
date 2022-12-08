@@ -3,10 +3,12 @@
   "version": "0.0.1",
   "description": "Observe things",
   "permissions": [
+    "scripting",
     "storage",
     "tabs",
     "activeTab",
     "contextMenus"
+   
   ],
   "host_permissions": [
     "<all_urls>"
@@ -34,7 +36,7 @@
       "32": "assets/obsyIcon.png"
     },
     "default_title": "Obsy",
-    "default_popup": "popup.html"
+    "default_popup": "html/popup.html"
   },
  
   "manifest_version": 3
