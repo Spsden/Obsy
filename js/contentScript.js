@@ -29,6 +29,7 @@ function launchPopUp() {
   window.style.display = "flex";
   window.style.justifyContent = "space-evenly";
   window.style.flexDirection = "column";
+  window.style.zIndex = "1000";
 
   window.innerHTML = bottomPopup;
 
@@ -109,19 +110,13 @@ const bottomPopup = `
 </div>
 <br><br><br>
 <div style="display:flex;width:100%;flex-wrap: wrap;align-items:center">
-
    <label style="width:100%", for="xpath">Xpath</label><br />
    <input
       style= "padding:5px;flex-grow:100;height:30px;border-radius:8px;margin-right:10px;box-sizing: border-box;"
       type="text" , id="xpath_box" ,name="xpath" readonly/>
-      
-         <button style="border-radius:8px;padding: 10px 10px;color: #fff;background-color: #405cf5; cursor: pointer;box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;border-width: 0; appearance: button; box-sizing: border-box;" class="observe-btn">Copy</button>
+   <button style="border-radius:8px;padding: 10px 10px;color: #fff;background-color: #405cf5; cursor: pointer;box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;border-width: 0; appearance: button; box-sizing: border-box;" class="observe-btn">Copy</button>
 </div>
-
-
-
 <br>
-
 <div>
    <button style="border-radius:8px;padding: 10px 25px;color: #fff;background-color: #405cf5; cursor: pointer;box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;border-width: 0; appearance: button; box-sizing: border-box;" class="observe-btn">Start Observing</button>
 </div>

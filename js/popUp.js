@@ -20,6 +20,8 @@ selectElementBtn.addEventListener("click", () => {
     if (tabs[0].status === "complete") {
       chrome.tabs.sendMessage(tabs[0].id, { message: "launch-popup" });
 
+      document.querySelector('.popUpPage').style.display= 'none';
+
       // extensionIsOn = !extensionIsOn;
       // let message = {
       //     popUp
