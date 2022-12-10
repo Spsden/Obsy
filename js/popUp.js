@@ -34,12 +34,6 @@ const infoCardHtml = `
 
 `;
 
-chrome.runtime.onMessage.addListener((message) => {
-  //console.log(message.domainName);
-  if (message.from === "content_script") {
-    console.log(message.domainName + "jfjfjf");
-  }
-});
 const selectElementBtn = document.querySelector(".observe-btn");
 
 let extensionIsOn = true;
@@ -50,19 +44,9 @@ selectElementBtn.addEventListener("click", () => {
       chrome.tabs.sendMessage(tabs[0].id, { message: "launch-popup" });
 
       document.querySelector(".popUpPage").style.display = "none";
-
-      // extensionIsOn = !extensionIsOn;
-      // let message = {
-      //     popUp
-      // }
-      // chrome.tabs.sendMessage(tabs[0].id,message);
     }
   });
 });
-
-//infoCard.innerHTML = infoCardHtml;
-
-const deleteButton = infoCardHtml.querySelector('.delete-btn')
 
 const listy = document.getElementById("listy");
 
@@ -72,8 +56,16 @@ const showObserveList = (observeList) => {
     infoCard.innerHTML = infoCardHtml;
     const faviconAvatar = infoCard.querySelector("#avatar");
     const titleDiv = infoCard.querySelector("#element-name");
+    const deleteButton = infoCard.querySelector('.delete-btn');
+    deleteButton.addEventListener('click',()=> {
+      console.log("dripppppy")
+      const newObserveList = observeList.filter((e)=> e.id != item.id);
+      chrome.storage.sync.set({[obsyList]:JSON.stringify(newObserveList)});
+      window.location.reload()
+    })
+
     faviconAvatar.src = item.icon;
-     titleDiv.innerHTML = item.title;
+    titleDiv.innerHTML = item.title;
 
     //infoCard.innerText = item;
     listy.appendChild(infoCard);
