@@ -2,7 +2,9 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message === "launch-popup") {
     console.log("hehe");
     launchPopUp();
+   
   }
+  
 });
 
 function hehe() {
@@ -13,29 +15,31 @@ function hehe() {
 const bottom = document.getElementsByClassName("bottom-box");
 
 function launchPopUp() {
-  // Create the floating window
 
-  let window = document.createElement("div");
-  window.className = "obsyBottomPopUp"
-  window.style.position = "fixed";
-  window.style.height = "350px";
-  window.style.width = "500px";
-  window.style.backgroundColor = "#1f2633";
-  window.style.bottom = "5px";
-  window.style.right = "5px";
-  window.style.color = "white";
-  window.style.borderRadius = "8px";
-  window.style.padding = "8px";
-  window.style.display = "flex";
-  window.style.justifyContent = "space-evenly";
-  window.style.flexDirection = "column";
-  window.style.zIndex = "1000";
+  
+  ///console.log(window.location.hostname)
 
-  window.innerHTML = bottomPopup;
+  let bottomMenu = document.createElement("div");
+  bottomMenu.className = "obsyBottomPopUp";
+  bottomMenu.style.position = "fixed";
+  bottomMenu.style.height = "350px";
+  bottomMenu.style.width = "500px";
+  bottomMenu.style.backgroundColor = "#1f2633";
+  bottomMenu.style.bottom = "5px";
+  bottomMenu.style.right = "5px";
+  bottomMenu.style.color = "white";
+  bottomMenu.style.borderRadius = "8px";
+  bottomMenu.style.padding = "8px";
+  bottomMenu.style.display = "flex";
+  bottomMenu.style.justifyContent = "space-evenly";
+  bottomMenu.style.flexDirection = "column";
+  bottomMenu.style.zIndex = "1000";
 
-  document.body.appendChild(window);
+  bottomMenu.innerHTML = bottomPopup;
 
-  HoverSelector(window);
+  document.body.append(bottomMenu);
+
+  HoverSelector(bottomMenu);
 }
 
 function HoverSelector(bottomDiv) {
@@ -122,78 +126,3 @@ const bottomPopup = `
 </div>
 `;
 
-// $(document).ready(function () {
-
-//   console.log("kjuj");
-
-//   const popUp = document.createElement("div");
-//   popUp.id = "contextMenuObsy";
-//   popUp.className = "contextClassObsy";
-//   popUp.innerHTML = `
-//     <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="display:block;position:static;margin-bottom:5px;">
-//     <li><a tabindex="-1" href="#">Action 1</a>
-//     </li>
-//     <li><a tabindex="-1" href="#">Action 2</a>
-//     </li>
-//     <li><a tabindex="-1" href="#">Some More Actions</a>
-//     </li>
-//     <li class="divider"></li>
-//     <li><a tabindex="-1" href="#">Final Action</a>
-//     </li>
-//   </ul>
-//     `;
-//   popUp.style.display = "none";
-//   popUp.style.height = "200px";
-
-//   popUp.style.background = "white";
-//   popUp.style.position = "absolute";
-//   popUp.style.zIndex = "1000000000000000000";
-
-//   //document.body.appendChild(popUp);
-
-//   $("<style>")
-//     .text(
-//       `.borderClass { box-shadow: 0 0 0 3px black;
-//         background : '#c9e8f7';
-//         margin: 0;
-//         position:relative;
-//         padding: 0;}`
-//     )
-//     .appendTo(document.head);
-
-//   const contextMenu = document.body.getElementsByClassName("contextClassObsy");
-
-//   $("*")
-//     .not("body")
-//     .hover(
-//       function () {
-//         $(this).first().addClass("borderClass");
-//       },
-//       function () {
-//         // $(".new").remove();
-
-//         $("*").not(this).removeClass("borderClass");
-//         // $(".contextClassObsy").css({
-//         //     display:"none"
-
-//         // })
-
-//         //$(this).removeClass("borderClass")
-//       }
-//     );
-// });
-
-// console.log("lol -=-0---------------------");
-
-// const overlay = document.createElement('div');
-// overlay.style.position = 'absolute';
-// overlay.style.top = 0;
-// overlay.style.left = 0;
-// overlay.style.right = 0;
-// overlay.style.bottom = 0;
-// overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.5)';
-// overlay.style.color = '#fff';
-// overlay.style.textAlign = 'center';
-// overlay.style.verticalAlign = 'middle';
-// overlay.style.display = 'none';
-// document.body.appendChild(overlay);

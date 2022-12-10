@@ -1,16 +1,16 @@
 .container {
   margin: 0px;
-  padding: 0px;
-  width: 300px;
+  padding: 5px;
+  width: 400px;
   height: 500px;
 }
 
 .bottom_container {
-  /* display: flex; */
+ 
   height: 100%;
   width: 100%;
-  position: relative;
-  /* flex-direction: column; */
+ 
+ 
 
   padding: 5px;
 }
@@ -39,16 +39,19 @@
 }
 
 .obsy-list {
-  width: 93vw;
+ 
   height: 300px;
-  background-color: #769ee894;
+  display: flex;
+ 
   margin: auto;
   overflow: auto;
   scrollbar-width: thin;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
+  justify-self: start;
+  background-color: #2b4575;
+  
+ 
+  
   border-radius: 8px;
 }
 
