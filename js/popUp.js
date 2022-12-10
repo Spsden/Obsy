@@ -6,10 +6,11 @@ const infoCardHtml = `
 
 <div style="margin:5px;height:100px; padding: 3px; border: 1px solid black;background-color:#151515; border-radius:8px;color:white;">
   <div style="display: flex; align-items: center; margin-bottom: 5px;">
-    <img src="https://s3-symbol-logo.tradingview.com/amazon--big.svg" alt="website-icon" style="height: 50px; width: 50px; border-radius: 50%; margin-right: 20px;" id = "avatar" />
+    <img src="https://s3-symbol-logo.tradingview.com/amazon--big.svg" alt="website-icon" style="height: 30px; width: 30px; border-radius: 50%; margin-right: 20px;" id = "avatar" />
     <h3 style="  font-size: 15px;
   overflow: hidden;
   white-space: nowrap;
+  word-wrap: normal;
   text-overflow: ellipsis;
   width: 60%;" id = "element-name">Obsy demo extension sale hehehehehhe</h3>
   </div>
@@ -53,6 +54,7 @@ const listy = document.getElementById("listy");
 const showObserveList = (observeList) => {
   observeList.forEach((item) => {
     let infoCard = document.createElement("div");
+    infoCard.style.margin = '0';
     infoCard.innerHTML = infoCardHtml;
     const faviconAvatar = infoCard.querySelector("#avatar");
     const titleDiv = infoCard.querySelector("#element-name");

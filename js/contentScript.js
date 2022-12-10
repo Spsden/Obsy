@@ -75,7 +75,7 @@ function HoverSelector(bottomDiv) {
       event.preventDefault();
 
       const xPath = xpath(hoveredElement);
-      observeElementTitle = hoveredElement.innerText.slice(0, 100);
+      observeElementTitle = hoveredElement.innerText.slice(0, 100).trim();
       observeXpath = xPath;
       chosenOrNot = true;
       xPathDisplayBox.value = xPath;
