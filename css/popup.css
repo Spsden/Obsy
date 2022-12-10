@@ -3,6 +3,8 @@
   padding: 5px;
   width: 400px;
   height: 500px;
+
+ 
 }
 
 .bottom_container {
@@ -14,14 +16,11 @@
 .labels {
   font-size: 15px;
   font-weight: 600;
+  
 }
 
-
-
-
-
 .obsy-list {
-  height: 300px;
+  height: 330px;
   width: 90vw;
   margin: auto;
   padding: 0;
@@ -48,13 +47,15 @@
   appearance: button;
   box-sizing: border-box;
 }
-.btn-row{
+.observe-btn:hover{
+  background-color: #7f8cdb;
+
+}
+.btn-row {
   position: absolute;
   bottom: 0;
   margin: 10px 0;
 }
-
-
 
 body {
   background-color: #1f2633;

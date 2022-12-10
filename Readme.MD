@@ -1,2 +1,2 @@
 #Obsy
-##A observing chrome extension (in development)
+##An observing chrome extension (in development)
