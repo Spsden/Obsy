@@ -6,12 +6,12 @@ const infoCardHtml = `
 
 <div style="margin:5px;height:100px; padding: 3px; border: 1px solid black;background-color:#151515; border-radius:8px;color:white;">
   <div style="display: flex; align-items: center; margin-bottom: 5px;">
-    <img src="https://s3-symbol-logo.tradingview.com/amazon--big.svg" alt="website-icon" style="height: 50px; width: 50px; border-radius: 50%; margin-right: 20px;" />
+    <img src="https://s3-symbol-logo.tradingview.com/amazon--big.svg" alt="website-icon" style="height: 50px; width: 50px; border-radius: 50%; margin-right: 20px;" id = "avatar" />
     <h3 style="  font-size: 15px;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  width: 60%;" ,id="element-name">Obsy demo extensionon sale hehehehehhe</h3>
+  width: 60%;" id = "element-name">Obsy demo extension sale hehehehehhe</h3>
   </div>
 
   <div style="display: flex; align-items: center; ">
@@ -26,7 +26,7 @@ const infoCardHtml = `
     </select>
     <div style="display: flex; margin-left: auto; ">
       <button style="margin: 0 5px;"><i class="fa fa-pause fa-1x"></i></button>
-      <button style=" margin: 0 5px;"><i class="fa fa-trash fa-1x"></i></button>
+      <button style=" margin: 0 5px;" class = "delete-btn"><i class="fa fa-trash fa-1x"></i></button>
       <button style=" margin: 0 5px;"><i class="fa fa-edit fa-1x"></i></button>
     </div>
   </div>
@@ -62,30 +62,28 @@ selectElementBtn.addEventListener("click", () => {
 
 //infoCard.innerHTML = infoCardHtml;
 
-let listy = document.getElementById("listy");
+const deleteButton = infoCardHtml.querySelector('.delete-btn')
+
+const listy = document.getElementById("listy");
 
 const showObserveList = (observeList) => {
-  
   observeList.forEach((item) => {
     let infoCard = document.createElement("div");
     infoCard.innerHTML = infoCardHtml;
-    
-  
+    const faviconAvatar = infoCard.querySelector("#avatar");
+    const titleDiv = infoCard.querySelector("#element-name");
+    faviconAvatar.src = item.icon;
+     titleDiv.innerHTML = item.title;
+
     //infoCard.innerText = item;
     listy.appendChild(infoCard);
   });
-  
-
-}
-
+};
 
 document.addEventListener("DOMContentLoaded", async () => {
   console.log("FROM POPUPJS");
   chrome.storage.sync.get([obsyList], (result) => {
-  const observeList = result[obsyList] ? JSON.parse(result[obsyList]) : [];
-  showObserveList(observeList);
-  
-
+    const observeList = result[obsyList] ? JSON.parse(result[obsyList]) : [];
+    showObserveList(observeList);
   });
 });
-
