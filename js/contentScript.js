@@ -2,9 +2,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.message === "launch-popup") {
     console.log("hehe");
     launchPopUp();
-   
   }
-  
 });
 
 function hehe() {
@@ -15,8 +13,6 @@ function hehe() {
 const bottom = document.getElementsByClassName("bottom-box");
 
 function launchPopUp() {
-
-  
   ///console.log(window.location.hostname)
 
   let bottomMenu = document.createElement("div");
@@ -46,10 +42,10 @@ function HoverSelector(bottomDiv) {
   const hoverDisplayBox = bottomDiv.querySelector("#info_boxes");
   const startButton = bottomDiv.getElementsByClassName("observe-btn")[0];
   const xPathDisplayBox = bottomDiv.querySelector("#xpath_box");
-  console.log(xPathDisplayBox);
-  startButton.addEventListener("click", () => {
-    console.log("starthd");
-  });
+  let chosenOrNot = false;
+  let observeElementTitle;
+  let observeXpath;
+
   let hoveredElement = null;
 
   document.addEventListener("mouseover", (event) => {
@@ -79,10 +75,34 @@ function HoverSelector(bottomDiv) {
       event.preventDefault();
 
       const xPath = xpath(hoveredElement);
+      observeElementTitle = hoveredElement.innerText.slice(0, 100);
+      observeXpath = xPath;
+      chosenOrNot = true;
       xPathDisplayBox.value = xPath;
 
       console.log(xPath);
     }
+  });
+
+  startButton.addEventListener("click", () => {
+    if (!chosenOrNot) {
+      alert(
+        "Please select an element. \n To select an element hold ctrl button and click on the element you want to be observed"
+      );
+    } else {
+      let startObject = {
+        from: "content_script",
+        id: Date.now() * Math.random(),
+        icon:
+          "http://www.google.com/s2/favicons?domain=" +
+          window.location.hostname,
+        title: observeElementTitle,
+        xPath: observeXpath,
+      };
+
+      chrome.runtime.sendMessage(startObject);
+    }
+    console.log("heheh");
   });
 }
 
@@ -118,11 +138,10 @@ const bottomPopup = `
    <input
       style= "padding:5px;flex-grow:100;height:30px;border-radius:8px;margin-right:10px;box-sizing: border-box;"
       type="text" , id="xpath_box" ,name="xpath" readonly/>
-   <button style="border-radius:8px;padding: 10px 10px;color: #fff;background-color: #405cf5; cursor: pointer;box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;border-width: 0; appearance: button; box-sizing: border-box;" class="observe-btn">Copy</button>
+   <button style="border-radius:8px;padding: 10px 10px;color: #fff;background-color: #405cf5; cursor: pointer;box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;border-width: 0; appearance: button; box-sizing: border-box;" class="copy-btn">Copy</button>
 </div>
 <br>
 <div>
    <button style="border-radius:8px;padding: 10px 25px;color: #fff;background-color: #405cf5; cursor: pointer;box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;border-width: 0; appearance: button; box-sizing: border-box;" class="observe-btn">Start Observing</button>
 </div>
 `;
-

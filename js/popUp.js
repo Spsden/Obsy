@@ -1,3 +1,4 @@
+const obsyList = "obsyList";
 const infoCardHtml = `
 <head>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -31,20 +32,24 @@ const infoCardHtml = `
   </div>
 </div>
 
-`
+`;
+
+chrome.runtime.onMessage.addListener((message) => {
+  //console.log(message.domainName);
+  if (message.from === "content_script") {
+    console.log(message.domainName + "jfjfjf");
+  }
+});
 const selectElementBtn = document.querySelector(".observe-btn");
 
 let extensionIsOn = true;
 
-
 selectElementBtn.addEventListener("click", () => {
-
-  
   chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
     if (tabs[0].status === "complete") {
       chrome.tabs.sendMessage(tabs[0].id, { message: "launch-popup" });
 
-      document.querySelector('.popUpPage').style.display= 'none';
+      document.querySelector(".popUpPage").style.display = "none";
 
       // extensionIsOn = !extensionIsOn;
       // let message = {
@@ -55,27 +60,32 @@ selectElementBtn.addEventListener("click", () => {
   });
 });
 
-
-
 //infoCard.innerHTML = infoCardHtml;
-let listy = document.getElementById('listy');
 
-let data = ["My ","name","is","suraj","pratap","singh"];
+let listy = document.getElementById("listy");
 
-data.forEach((item)=>{
-  let infoCard = document.createElement('div');
-  infoCard.innerHTML = infoCardHtml;
+const showObserveList = (observeList) => {
+  
+  observeList.forEach((item) => {
+    let infoCard = document.createElement("div");
+    infoCard.innerHTML = infoCardHtml;
+    
+  
+    //infoCard.innerText = item;
+    listy.appendChild(infoCard);
+  });
+  
 
-//infoCard.innerText = item;
-listy.appendChild(infoCard);
-
-
-
-
-})
-
-
-
+}
 
 
+document.addEventListener("DOMContentLoaded", async () => {
+  console.log("FROM POPUPJS");
+  chrome.storage.sync.get([obsyList], (result) => {
+  const observeList = result[obsyList] ? JSON.parse(result[obsyList]) : [];
+  showObserveList(observeList);
+  
+
+  });
+});
 
