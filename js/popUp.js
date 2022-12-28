@@ -1,12 +1,27 @@
 const obsyList = "obsyList";
 const infoCardHtml = `
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet"
+   href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
-<div style="margin:5px;height:100px; padding: 3px; border: 1px solid black;background-color:#151515; border-radius:8px;color:white;">
+<div 
+style="margin:5px;
+height:100px;
+padding: 3px;
+border: 1px solid black;
+background-color:#151515;
+border-radius:8px;
+color:white;">
   <div style="display: flex; align-items: center; margin-bottom: 5px;">
-    <img src="https://s3-symbol-logo.tradingview.com/amazon--big.svg" alt="website-icon" style="height: 30px; width: 30px; border-radius: 50%; margin-right: 20px;" id = "avatar" />
+    <img 
+    src="https://s3-symbol-logo.tradingview.com/amazon--big.svg"
+    alt="website-icon" 
+    style="height: 20px; 
+    width: 20px; 
+    border-radius: 50%; 
+    margin: 0 10px;" 
+    id = "avatar" />
     <h3 style="  font-size: 15px;
   overflow: hidden;
   white-space: nowrap;
@@ -54,17 +69,17 @@ const listy = document.getElementById("listy");
 const showObserveList = (observeList) => {
   observeList.forEach((item) => {
     let infoCard = document.createElement("div");
-    infoCard.style.margin = '0';
+    infoCard.style.margin = "0";
     infoCard.innerHTML = infoCardHtml;
     const faviconAvatar = infoCard.querySelector("#avatar");
     const titleDiv = infoCard.querySelector("#element-name");
-    const deleteButton = infoCard.querySelector('.delete-btn');
-    deleteButton.addEventListener('click',()=> {
-      console.log("dripppppy")
-      const newObserveList = observeList.filter((e)=> e.id != item.id);
-      chrome.storage.sync.set({[obsyList]:JSON.stringify(newObserveList)});
-      window.location.reload()
-    })
+    const deleteButton = infoCard.querySelector(".delete-btn");
+    deleteButton.addEventListener("click", () => {
+      console.log("dripppppy");
+      const newObserveList = observeList.filter((e) => e.id != item.id);
+      chrome.storage.sync.set({ [obsyList]: JSON.stringify(newObserveList) });
+      window.location.reload();
+    });
 
     faviconAvatar.src = item.icon;
     titleDiv.innerHTML = item.title;

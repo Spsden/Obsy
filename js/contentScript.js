@@ -16,6 +16,7 @@ function launchPopUp() {
   ///console.log(window.location.hostname)
 
   let bottomMenu = document.createElement("div");
+
   bottomMenu.className = "obsyBottomPopUp";
   bottomMenu.style.position = "fixed";
   bottomMenu.style.height = "350px";
@@ -29,11 +30,12 @@ function launchPopUp() {
   bottomMenu.style.display = "flex";
   bottomMenu.style.justifyContent = "space-evenly";
   bottomMenu.style.flexDirection = "column";
+  bottomMenu.style.boxSizing = "border-box";
   bottomMenu.style.zIndex = "1000";
 
   bottomMenu.innerHTML = bottomPopup;
 
-  document.body.append(bottomMenu);
+  document.body.appendChild(bottomMenu);
 
   HoverSelector(bottomMenu);
 }
@@ -42,6 +44,7 @@ function HoverSelector(bottomDiv) {
   const hoverDisplayBox = bottomDiv.querySelector("#info_boxes");
   const startButton = bottomDiv.getElementsByClassName("observe-btn")[0];
   const xPathDisplayBox = bottomDiv.querySelector("#xpath_box");
+  const titleInputBox = bottomDiv.querySelector("#title-input");
   let chosenOrNot = false;
   let observeElementTitle;
   let observeXpath;
@@ -90,19 +93,22 @@ function HoverSelector(bottomDiv) {
         "Please select an element. \n To select an element hold ctrl button and click on the element you want to be observed"
       );
     } else {
+      const inputTitle = titleInputBox.value;
       let startObject = {
         from: "content_script",
         id: Date.now() * Math.random(),
         icon:
           "http://www.google.com/s2/favicons?domain=" +
           window.location.hostname,
-        title: observeElementTitle,
+        title: inputTitle ? inputTitle : observeElementTitle,
         xPath: observeXpath,
       };
 
       chrome.runtime.sendMessage(startObject);
     }
     console.log("heheh");
+
+    document.body.querySelector(".obsyBottomPopUp").style.display = "none";
   });
 }
 
@@ -124,24 +130,72 @@ function xpath(el) {
 }
 
 const bottomPopup = `
-<div style="height:50%;width:100%;display:block", class="hover-box">
-   <label for="hovering_over" , class="labels">Hovering over</label
+<div style="height:50%;width:100%;height;display:block;", class="hover-box">
+   <label style="margin:5px;font-size:15px;" for="hovering_over", class="labels">Hovering over</label
       ><br />
    <iframe
-      style="padding:3px;width:100%;height:100%;border-radius:8px;background-color:white",
+      style="padding:3px;width:100%;height:100px;border-radius:8px;background-color:white",
       id="info_boxes"
       ></iframe>
 </div>
-<br><br><br>
+<br>
 <div style="display:flex;width:100%;flex-wrap: wrap;align-items:center">
-   <label style="width:100%", for="xpath">Xpath</label><br />
+   <label style="width:100%;font-size:15px;", for="xpath">Xpath</label><br />
    <input
-      style= "padding:5px;flex-grow:100;height:30px;border-radius:8px;margin-right:10px;box-sizing: border-box;"
+      style= "padding:5px;
+      flex-grow:100;
+      height:30px;
+      border-radius:8px;
+      margin-right:10px;
+      box-sizing: border-box;"
       type="text" , id="xpath_box" ,name="xpath" readonly/>
-   <button style="border-radius:8px;padding: 10px 10px;color: #fff;background-color: #405cf5; cursor: pointer;box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;border-width: 0; appearance: button; box-sizing: border-box;" class="copy-btn">Copy</button>
+   <button 
+   style="border-radius:8px;
+   padding: 10px 10px;
+   color: #fff;
+   background-color: #405cf5;
+   cursor: pointer;box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+   border-width: 0;
+   appearance: button;
+   box-sizing: border-box;"
+   class="copy-btn">Copy</button>
 </div>
 <br>
-<div>
-   <button style="border-radius:8px;padding: 10px 25px;color: #fff;background-color: #405cf5; cursor: pointer;box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;border-width: 0; appearance: button; box-sizing: border-box;" class="observe-btn">Start Observing</button>
+<div style="display:flex;justify-content:space-between;align-items:center">
+
+    <input style= "padding:5px;
+    height:30px;
+    border-radius:8px;
+    margin-right:10px;
+    box-sizing: border-box;" type='text' id='title-input' placeholder="Title" name='title-input'>
+
+
+    
+    <div>
+    <input style="; position: relative; width: 35px;height:30px;border-radius:8px; margin-right: 0; box-sizing: border-box;
+    " />
+  <select style="padding:1px;height:30px;border-radius:8px;">
+    <option>min</option>
+    <option>sec</option>
+    <option>hrs</option>
+    <option>days</option>
+  </select>
+    </div>
+   
+   
+
+   <button 
+   style="border-radius:8px;
+   padding: 10px 15px;
+   color: #fff;
+   background-color: #405cf5;
+    cursor: pointer;
+    box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;border-width: 0; 
+    appearance: button; 
+    box-sizing: border-box;" 
+    class="observe-btn">Start Observing</button>
+    <br>
+
+  
 </div>
 `;
