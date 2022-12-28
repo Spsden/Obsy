@@ -51,7 +51,6 @@ function HoverSelector(bottomDiv) {
   let observeElementTitle;
   let observeXpath;
 
-
   let hoveredElement = null;
 
   document.addEventListener("mouseover", (event) => {
@@ -98,9 +97,9 @@ function HoverSelector(bottomDiv) {
     } else {
       const inputTitle = titleInputBox.value;
       const timeIntData = timeIntBox.value;
-    console.log(timeIntBox.value)
-     const durationData = duration.value;
-     
+      console.log(timeIntBox.value);
+      const durationData = duration.value;
+
       let startObject = {
         from: "content_script",
         id: Date.now() * Math.random(),
@@ -109,8 +108,8 @@ function HoverSelector(bottomDiv) {
           window.location.hostname,
         title: inputTitle ? inputTitle : observeElementTitle,
         xPath: observeXpath,
-       timeInt:timeIntData ? timeIntData : '1',
-        duration:durationData ? durationData : 'min'
+        timeInt: timeIntData ? timeIntData : "1",
+        duration: durationData ? durationData : "min",
       };
 
       chrome.runtime.sendMessage(startObject);

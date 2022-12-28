@@ -33,8 +33,8 @@ color:white;">
   <div style="display: flex; align-items: center; ">
   <label style="font-size:10px;text-align:bottom;margin:5px;">Checks every</label>
     <input style="; position: relative; width: 15px; margin-right: 0;
-      " />
-    <select style="padding:1px">
+      " id='timeInt'/>
+    <select style="padding:1px" id='duration'>
       <option>min</option>
       <option>sec</option>
       <option>hrs</option>
@@ -66,6 +66,8 @@ selectElementBtn.addEventListener("click", () => {
 
 const listy = document.getElementById("listy");
 
+
+//The Pop up list logic
 const showObserveList = (observeList) => {
   observeList.forEach((item) => {
     let infoCard = document.createElement("div");
@@ -74,6 +76,9 @@ const showObserveList = (observeList) => {
     const faviconAvatar = infoCard.querySelector("#avatar");
     const titleDiv = infoCard.querySelector("#element-name");
     const deleteButton = infoCard.querySelector(".delete-btn");
+    const timeInt = infoCard.querySelector('#timeInt');
+    const duration = infoCard.querySelector('#duration');
+    
     deleteButton.addEventListener("click", () => {
       console.log("dripppppy");
       const newObserveList = observeList.filter((e) => e.id != item.id);
@@ -83,6 +88,9 @@ const showObserveList = (observeList) => {
 
     faviconAvatar.src = item.icon;
     titleDiv.innerHTML = item.title;
+    timeInt.value = item.timeInt;
+    duration.value = item.duration;
+
 
     //infoCard.innerText = item;
     listy.appendChild(infoCard);
