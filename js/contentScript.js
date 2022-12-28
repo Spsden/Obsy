@@ -45,9 +45,12 @@ function HoverSelector(bottomDiv) {
   const startButton = bottomDiv.getElementsByClassName("observe-btn")[0];
   const xPathDisplayBox = bottomDiv.querySelector("#xpath_box");
   const titleInputBox = bottomDiv.querySelector("#title-input");
+  const timeIntBox = bottomDiv.querySelector("#timeInt");
+  const duration = bottomDiv.querySelector("#duration");
   let chosenOrNot = false;
   let observeElementTitle;
   let observeXpath;
+
 
   let hoveredElement = null;
 
@@ -94,6 +97,10 @@ function HoverSelector(bottomDiv) {
       );
     } else {
       const inputTitle = titleInputBox.value;
+      const timeIntData = timeIntBox.value;
+    console.log(timeIntBox.value)
+     const durationData = duration.value;
+     
       let startObject = {
         from: "content_script",
         id: Date.now() * Math.random(),
@@ -102,6 +109,8 @@ function HoverSelector(bottomDiv) {
           window.location.hostname,
         title: inputTitle ? inputTitle : observeElementTitle,
         xPath: observeXpath,
+       timeInt:timeIntData ? timeIntData : '1',
+        duration:durationData ? durationData : 'min'
       };
 
       chrome.runtime.sendMessage(startObject);
@@ -173,8 +182,8 @@ const bottomPopup = `
     
     <div>
     <input style="; position: relative; width: 35px;height:30px;border-radius:8px; margin-right: 0; box-sizing: border-box;
-    " />
-  <select style="padding:1px;height:30px;border-radius:8px;">
+    " id='timeInt'/>
+  <select style="padding:1px;height:30px;border-radius:8px;" id='duration'>
     <option>min</option>
     <option>sec</option>
     <option>hrs</option>
