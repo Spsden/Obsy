@@ -106,10 +106,10 @@ function HoverSelector(bottomDiv) {
         icon:
           "http://www.google.com/s2/favicons?domain=" +
           window.location.hostname,
-        title: inputTitle ? inputTitle : observeElementTitle,
+        title: inputTitle || observeElementTitle,
         xPath: observeXpath,
-        timeInt: timeIntData ? timeIntData : "1",
-        duration: durationData ? durationData : "min",
+        timeInt: timeIntData || "1",
+        duration: durationData || "min",
       };
 
       chrome.runtime.sendMessage(startObject);
