@@ -25,7 +25,8 @@
       "js": [
         
         "js/dependencies/jquery.js",
-        "js/contentScript.js"
+        "js/contentScript.js",
+        "js/changeObserver.js"
       ],
       "matches": [
         "<all_urls>"
